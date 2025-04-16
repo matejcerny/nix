@@ -3,8 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
@@ -12,8 +14,9 @@
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ pkgs.vim
+      environment.systemPackages = with pkgs; [ 
+          neovim
+          lsd
         ];
 
       # Necessary for using flakes on this system.
@@ -34,13 +37,22 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      fonts.packages = with pkgs; [
+        fira-code
+        fira-code-symbols
+      ];
     };
   in
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#BlackFox-M4
     darwinConfigurations."BlackFox-M4" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+      modules = [ 
+        configuration 
+        ./macos.nix
+        ./homebrew.nix
+      ];
     };
   };
 }

@@ -20,6 +20,7 @@
       minimize-to-application = true;
       mru-spaces = false;
       persistent-apps = [
+	"${pkgs.obsidian}/Applications/Obsidian.app"
         "/Applications/Brave Browser.app"
         "/Applications/Ghostty.app"
       ];
@@ -76,11 +77,11 @@
         allowApplePersonalizedAdvertising = false;
         allowIdentifierForAdvertising = false;
       };
-
-      # Disable startup sound
-      "com.apple.PowerChime".ChimeOnNoHardware = false;
     };
   };
+
+  # Disable startup sound
+  system.startup.chime = false;
 
   # Set computer/hostname 
   networking.computerName = "BlackFox-M4"; # Set in System Settings > General > About

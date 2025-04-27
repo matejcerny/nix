@@ -25,12 +25,16 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask }:
   let
     configuration = { pkgs, ... }: {
+
+      nixpkgs.config.allowUnfree = true; # Allow installation of non open source packages
+
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [ 
 	  bat
           lsd
           neovim
+	  obsidian
         ];
 
       # Necessary for using flakes on this system.

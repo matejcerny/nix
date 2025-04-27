@@ -18,12 +18,13 @@
       "ghostty"
       "google-drive"
       "signal"
+      "slack"
       "vlc"
     ];
 
-    # Optional: Configure update/cleanup behavior (use with care)
-    # onActivation.autoUpdate = true;  # Run `brew update` during activation
-    # onActivation.upgrade = true;     # Run `brew upgrade` during activation
-    # onActivation.cleanup = "zap";    # Run `brew cleanup --zap` during activation
+    # Update brew packages via nix flake update
+    onActivation.autoUpdate = true;  # Run `brew update` during activation
+    onActivation.upgrade = true;     # Run `brew upgrade` during activation
+    onActivation.cleanup = "zap";    # Run `brew cleanup --zap` during activation
   };
 }

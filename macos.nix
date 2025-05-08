@@ -3,6 +3,11 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Following line should allow us to avoid a logout/login cycle
+  system.activationScripts.postUserActivation.text = ''
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  '';
+
   system.defaults = {
 
     controlcenter = {
@@ -20,9 +25,9 @@
       minimize-to-application = true;
       mru-spaces = false;
       persistent-apps = [
-	"${pkgs.obsidian}/Applications/Obsidian.app"
-        "/Applications/Brave Browser.app"
-        "/Applications/Ghostty.app"
+	#{ app = "${pkgs.obsidian}/Applications/Obsidian.app"; }
+        { app = "/Applications/Brave Browser.app"; }
+        { app = "/Applications/Ghostty.app"; }
       ];
       persistent-others = []; # Ensure no persistent folders/stacks like Downloads
       show-recents = false; # Prevent 'Recent Applications' section in Dock

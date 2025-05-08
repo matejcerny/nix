@@ -77,7 +77,7 @@
           home-manager.useUserPackages = true;
         }
 
-	# homebrew
+        # homebrew
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {

@@ -6,7 +6,7 @@
     # nix darwin
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -34,13 +34,23 @@
     configuration = { pkgs, ... }: {
 
       nixpkgs.config.allowUnfree = true; # Allow installation of non open source packages
+      nixpkgs.config.allowUnsupportedSystem = true; # Temporarily allow unsupported platforms because of "arm64-apple-darwin"
 
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [ 
         bat
+        brave
+        bruno
+        cyberduck
+        keka
         lsd
         neovim
+        obsidian
+        signal-desktop-bin
+        slack
+        vlc-bin
+        zed-editor
       ];
 
       # Necessary for using flakes on this system.
@@ -73,8 +83,10 @@
         # home manager
         home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager = {
+	    useGlobalPkgs = true;
+            useUserPackages = true;
+          };
         }
 
         # homebrew

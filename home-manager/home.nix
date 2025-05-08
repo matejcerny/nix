@@ -49,6 +49,10 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".config/ghostty/config".source = ~/dotfiles/ghostty/config;
+    ".config/nvim".source = ~/dotfiles/nvim;
+    ".config/zed/settings.json".source = ~/dotfiles/zed/settings.json;
+    ".config/zed/tasks.json".source = ~/dotfiles/zed/tasks.json;
   };
 
   # Home Manager can also manage your environment variables through
@@ -68,9 +72,13 @@
   #  /etc/profiles/per-user/matej.cerny/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  
+  imports = [
+    ~/.config/nix/home-manager/zsh.nix
+  ];
 }

@@ -26,7 +26,9 @@
       mru-spaces = false;
       persistent-apps = [
 	#{ app = "${pkgs.obsidian}/Applications/Obsidian.app"; }
-        { app = "/Applications/Brave Browser.app"; }
+        { app = "/System/Applications/Calculator.app"; }
+        { app = "/Applications/Nix Apps/Brave Browser.app"; }
+        { app = "/Applications/Nix Apps/Signal.app"; }
         { app = "/Applications/Ghostty.app"; }
       ];
       persistent-others = []; # Ensure no persistent folders/stacks like Downloads

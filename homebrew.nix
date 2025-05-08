@@ -14,12 +14,8 @@
     # brews = [ "git", "jq" ]; # Example
 
     casks = [
-      "brave-browser"
       "ghostty"
       "google-drive"
-      "signal"
-      "slack"
-      "vlc"
     ];
 
     # Update brew packages via nix flake update
